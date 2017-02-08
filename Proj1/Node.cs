@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace Proj1
 {
+    //A class that models a node in the binary tree
     class Node
     {
 
-        private string bossName;
+        //Contains the name of the ofthe node
+        private int bossName;
 
-        public string BossName
+        public int BossName
         {
             get { return bossName; }
             set { bossName = value; }
         }
 
+        //Left child of a node
         private Node left;
 
         public Node Left
@@ -25,6 +28,7 @@ namespace Proj1
             set { left = value; }
         }
 
+        //Right child of a node
         private Node right;
 
         public Node Right
@@ -33,7 +37,8 @@ namespace Proj1
             set { right = value; }
         }
 
-        public Node(string item)
+        //Constructor for initializing the node
+        public Node(int item)
         {
             bossName = item;
             left = right = null;
