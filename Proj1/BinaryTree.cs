@@ -77,11 +77,15 @@ namespace Proj1
                 //If no of the above criteria are met we return the node that is !=0
                 if (left != null)
                 {
+                    isFound = true;
+                    isFound2 = true;
                     return left;
                 }
 
                 if (right != null)
                 {
+                    isFound = true;
+                    isFound2 = true;
                     return right;
                 }
             }
