@@ -10,53 +10,60 @@ namespace Proj1
     {
         static void Main(string[] args)
         {
-            //Enter the root of the tree
-            Console.Write("Please enter the root of the tree: ");
-            int k = 0;
-            //Verify that the input is an integer
-            while (!int.TryParse(Console.ReadLine(), out k))
-            {
-                Console.Write("Please enter a valid numerical value!" );
-            }
-            //Create an isnatnce of the Binarytree class passing the name of the root element
-            BinaryTree tree = new BinaryTree(k);
+            BinaryTree tree = new BinaryTree();
 
             //Enter the number of nodes in the tree
-            Console.Write("\nEnter how many nodes you want to add to the tree: ");
+            Console.Write("Enter how many nodes you want to add to the tree: ");
 
-            String Result = Console.ReadLine();
-
-            int n;
+            int num;
 
             //Check that the input is a number
-            while (!Int32.TryParse(Result, out n))
+            while (!Int32.TryParse(Console.ReadLine(), out num))
             {
                 //if it's not a number prompt user to enter again until it's a number
                 Console.Write("Please enter a number! ");
-
-                Result = Console.ReadLine();
             }
 
             Console.Write("\n");
 
             //Loop for creating the tree with the specified number of nodes
-            for (int i = 1; i <= n; i++)
+            for (int i = 1; i < num; i++)
             {
-                Console.Write("Please enter nodes of the tree: ");
-                int s = 0;
-                //Verify that the input is an integer
-                while (!int.TryParse(Console.ReadLine(), out s))
+                if(tree.Top == null)
                 {
-                    Console.WriteLine("Please enter a valid numerical value!");
+                    Console.Write("Please enter the root of the tree: ");
+                    int root = 0;
+                    //Verify that the input is an integer
+                    while (!int.TryParse(Console.ReadLine(), out root))
+                    {
+                        Console.Write("Please enter a valid numerical value!");
+                    }
+                    tree.Top = new Node(root);
                 }
-                //Employees can't have the same name as the CEO
-                if (s.Equals(k))
+
+                if (num == 1)
                 {
-                    Console.Write("Enter a different name!");
-                    s = Convert.ToInt32(Console.ReadLine());
+                    break;
                 }
-                //Add the node into the tree
-                tree.AddNode(s);
+
+                else
+                {
+                    Console.Write("Please enter nodes of the tree: ");
+                    int enterNode = 0;
+                    //Verify that the input is an integer
+                    while (!int.TryParse(Console.ReadLine(), out enterNode))
+                    {
+                        Console.WriteLine("Please enter a valid numerical value!");
+                    }
+                    //Employees can't have the same name as the CEO
+                    if (enterNode.Equals(num))
+                    {
+                        Console.Write("Enter a different name!");
+                        enterNode = Convert.ToInt32(Console.ReadLine());
+                    }
+                    //Add the node into the tree
+                    tree.AddNode(enterNode);
+                }
             }
             Console.WriteLine("\nPress Enter to input nodes for LCA!");
 
@@ -64,33 +71,32 @@ namespace Proj1
             {
                 //Enter nodes to check if they have a common antcestor 
                 Console.Write("\nEnter a node: ");
-                int h = 0;
+                int firstNode = 0;
                 //Verify that the input is an integer
-                while (!int.TryParse(Console.ReadLine(), out h))
+                while (!int.TryParse(Console.ReadLine(), out firstNode))
                 {
                     Console.WriteLine("Please enter a valid numerical value!");
                 }
 
                 Console.Write("Enter a second node: ");
-                int j = 0;
+                int secondNode = 0;
                 //Verify that the input is an integer
-                while (!int.TryParse(Console.ReadLine(), out j))
+                while (!int.TryParse(Console.ReadLine(), out secondNode))
                 {
                     Console.WriteLine("Please enter a valid numerical value!");
                 }
 
                 //Pass the names to the function to see if they have a common boss
-                Node lca = tree.EnterBoss(h, j);
-                //if they do we return the name
-                if (lca != null)
+                Node lca = tree.EnterBoss(firstNode, secondNode);
+
+                try
                 {
                     Console.WriteLine("\nThe lowest common antcestor is: " + lca.BossName);
                     Console.WriteLine("\n(Esc to exit / Any key to continue!)");
                 }
-                //Else we return a message to indicate that one of the people isn't in the tree
-                else
+                catch(System.NullReferenceException)
                 {
-                    Console.WriteLine("\nBoth of the nodes are missing from the tree!");
+                    Console.WriteLine("\nNo nodes found! ");
                     Console.WriteLine("\n(Esc to exit / Any key to continue!)");
                 }
             }

@@ -9,10 +9,6 @@ namespace Proj1
     //Class that models the Binary tree
     class BinaryTree
     {
-        //Variables used to check if both of the entered people are in the tree
-        static Boolean isFound = false;
-        static Boolean isFound2 = false;
-
         //The first node in the tree(root of the tree)
         private Node top;
 
@@ -43,7 +39,6 @@ namespace Proj1
                 if (node.BossName == n1)
                 {
                     //If it does match we know that the entered name is present in the tree and then return the node
-                    isFound = true;
                     return node;
                 }
 
@@ -51,7 +46,6 @@ namespace Proj1
                 if (node.BossName == n2)
                 {
                     //If it does match we know that the entered name is present in the tree
-                    isFound2 = true;
                     return node;
                 }
 
@@ -77,15 +71,11 @@ namespace Proj1
                 //If no of the above criteria are met we return the node that is !=0
                 if (left != null)
                 {
-                    isFound = true;
-                    isFound2 = true;
                     return left;
                 }
 
                 if (right != null)
                 {
-                    isFound = true;
-                    isFound2 = true;
                     return right;
                 }
             }
@@ -97,22 +87,7 @@ namespace Proj1
         //and simplify entering values once we are in the main function
         public Node EnterBoss(int n1, int n2)
         {
-            isFound = false;
-            isFound2 = false;
-
-            //Pass the entered values to che function which
-            //determines the LCA
-            Node contain = CommonBoss(Top, n1, n2);
-
-            //If one of the names is not present we return null or else return the node which is the LCA
-            if (isFound == true && isFound2 == true)
-            {
-                return contain;
-            }
-            else
-            {
-                return null;
-            }
+            return CommonBoss(Top, n1, n2);
         }
 
         //Function that adds nodes to the tree with the given input value
